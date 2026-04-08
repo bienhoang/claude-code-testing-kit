@@ -5,6 +5,18 @@ set -euo pipefail
 # Usage: curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh | bash
 # Flags: --global, --local, --full, --skills-only, --uninstall, --help
 
+# Self-re-exec: if stdin is piped (curl | bash), save to temp file and re-run
+# so that stdin is freed for interactive prompts
+if [ ! -t 0 ] && [ -z "${_TK_REEXEC:-}" ]; then
+  _TK_TMPSCRIPT=$(mktemp "${TMPDIR:-/tmp}/tk-install.XXXXXX")
+  cat > "$_TK_TMPSCRIPT"
+  export _TK_REEXEC=1
+  exec bash "$_TK_TMPSCRIPT" "$@"
+fi
+# Clean up re-exec temp script if it exists
+[[ -n "${_TK_TMPSCRIPT:-}" && -f "${_TK_TMPSCRIPT:-}" ]] && rm -f "$_TK_TMPSCRIPT"
+unset _TK_REEXEC _TK_TMPSCRIPT 2>/dev/null || true
+
 REPO_OWNER="bienhoang"
 REPO_NAME="claude-code-testing-kit"
 BRANCH="main"
@@ -18,6 +30,7 @@ TMPDIR_PATH=""
 TARGET=""       # global | local
 MODE=""         # full | skills-only
 ACTION="install" # install | uninstall
+NONINTERACTIVE=false
 
 # Colors
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
@@ -54,11 +67,11 @@ show_help() {
 parse_args() {
   while [[ $# -gt 0 ]]; do
     case "$1" in
-      --global)      TARGET="global" ;;
-      --local)       TARGET="local" ;;
-      --full)        MODE="full" ;;
-      --skills-only) MODE="skills-only" ;;
-      --uninstall)   ACTION="uninstall" ;;
+      --global)      TARGET="global"; NONINTERACTIVE=true ;;
+      --local)       TARGET="local"; NONINTERACTIVE=true ;;
+      --full)        MODE="full"; NONINTERACTIVE=true ;;
+      --skills-only) MODE="skills-only"; NONINTERACTIVE=true ;;
+      --uninstall)   ACTION="uninstall"; NONINTERACTIVE=true ;;
       --help)        show_help ;;
       *) echo -e "${RED}Unknown option: $1${NC}"; show_help ;;
     esac
@@ -96,7 +109,7 @@ prompt_target() {
   echo "Cài skills vào đâu?"
   echo "  1) Global (~/.claude/skills/) — dùng cho mọi project"
   echo "  2) Local (.claude/skills/) — chỉ project hiện tại"
-  read -rp "Chọn [1/2] (default: 1): " choice </dev/tty
+  read -rp "Chọn [1/2] (default: 1): " choice
   case "${choice:-1}" in
     1) TARGET="global" ;;
     2) TARGET="local" ;;
@@ -110,7 +123,7 @@ prompt_mode() {
   echo "Cài những gì?"
   echo "  1) Full kit (skills + plans + templates + scripts)"
   echo "  2) Chỉ skills + CLAUDE.md"
-  read -rp "Chọn [1/2] (default: 1): " choice </dev/tty
+  read -rp "Chọn [1/2] (default: 1): " choice
   case "${choice:-1}" in
     1) MODE="full" ;;
     2) MODE="skills-only" ;;
@@ -135,9 +148,13 @@ install_skills() {
     local name; name=$(basename "$skill_dir")
     local target_dir="$dest/$name"
     if [[ -d "$target_dir" ]]; then
-      read -rp "  $name đã tồn tại. Ghi đè? [y/N]: " overwrite </dev/tty
-      [[ "${overwrite:-n}" =~ ^[Yy]$ ]] || continue
-      rm -rf "$target_dir"
+      if [[ "$NONINTERACTIVE" == true ]]; then
+        rm -rf "$target_dir"
+      else
+        read -rp "  $name đã tồn tại. Ghi đè? [y/N]: " overwrite
+        [[ "${overwrite:-n}" =~ ^[Yy]$ ]] || continue
+        rm -rf "$target_dir"
+      fi
     fi
     cp -r "$skill_dir" "$target_dir"
     count=$((count + 1))
@@ -148,8 +165,12 @@ install_skills() {
 install_extras() {
   # CLAUDE.md
   if [[ -f "CLAUDE.md" ]]; then
-    read -rp "CLAUDE.md đã tồn tại. Ghi đè? [y/N]: " overwrite </dev/tty
-    [[ "${overwrite:-n}" =~ ^[Yy]$ ]] && cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
+    if [[ "$NONINTERACTIVE" == true ]]; then
+      cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
+    else
+      read -rp "CLAUDE.md đã tồn tại. Ghi đè? [y/N]: " overwrite
+      [[ "${overwrite:-n}" =~ ^[Yy]$ ]] && cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
+    fi
   else
     cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
     echo -e "${GREEN}Copied CLAUDE.md → ./CLAUDE.md${NC}"
@@ -177,7 +198,8 @@ install_extras() {
     echo -e "${GREEN}Copied scripts/${NC}"
     # Offer npm install if Node exists
     if command -v node &>/dev/null && [[ -f "scripts/integrations/package.json" ]]; then
-      read -rp "Chạy npm install cho Jira/Xray scripts? [Y/n]: " npm_install </dev/tty
+      local npm_install="y"
+      [[ "$NONINTERACTIVE" != true ]] && read -rp "Chạy npm install cho Jira/Xray scripts? [Y/n]: " npm_install
       if [[ "${npm_install:-y}" =~ ^[Yy]$ ]]; then
         (cd scripts/integrations && npm install --silent 2>/dev/null) && echo -e "${GREEN}npm install done.${NC}" || echo -e "${YELLOW}npm install failed — chạy thủ công: cd scripts/integrations && npm install${NC}"
       fi
