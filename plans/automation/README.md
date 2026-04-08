@@ -47,11 +47,11 @@ Gọi workflow `/generate_automation_from_testcases` + đính kèm Test Cases:
 
 ## 📋 Rules tham chiếu
 
-- `.agent/rules/automation_rules.md` — POM, Data, Naming conventions
-- `.agent/rules/locator_strategy.md` — Thứ tự ưu tiên locator
-- `.agent/rules/playwright_rules.md` — Playwright-specific rules
-- `.agent/rules/selenium_rules.md` — Selenium-specific rules
-- `.agent/rules/appium_rules.md` — Appium-specific rules
+- `.claude/skills/tk-qa-master/references/automation-rules.md` — POM, Data, Naming conventions
+- `.claude/skills/tk-qa-master/references/locator-strategy.md` — Thứ tự ưu tiên locator
+- `.claude/skills/tk-qa-master/references/playwright-rules.md` — Playwright-specific rules
+- `.claude/skills/tk-qa-master/references/selenium-rules.md` — Selenium-specific rules
+- `.claude/skills/tk-qa-master/references/appium-rules.md` — Appium-specific rules
 
 ## 📁 Hướng dẫn nhanh
 

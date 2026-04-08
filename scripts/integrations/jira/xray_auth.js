@@ -216,7 +216,7 @@ async function main() {
 
   console.log(`
 ╔══════════════════════════════════════════════════════════════╗
-║             XRAY AUTHENTICATION - Antigravity               ║
+║             XRAY AUTHENTICATION - Claude Code               ║
 ║          Lấy và quản lý Xray API Token                      ║
 ╚══════════════════════════════════════════════════════════════╝
 `);

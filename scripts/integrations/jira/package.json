@@ -1,7 +1,7 @@
 {
-  "name": "antigravity-jira-integration",
+  "name": "claude-code-jira-integration",
   "version": "1.0.0",
-  "description": "Jira & Xray integration scripts for Antigravity Testing Kit",
+  "description": "Jira & Xray integration scripts for Claude Code Testing Kit",
   "private": true,
   "scripts": {
     "fetch": "node jira/jira_fetcher.js",

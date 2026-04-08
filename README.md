@@ -1,138 +1,134 @@
-# Antigravity Testing Kit 🚀
+# Claude Code Testing Kit
 
-👋 Chào mừng bạn đến với **Antigravity Testing Kit**!
+Chào mừng bạn đến với **Claude Code Testing Kit**!
 
-Đây là bộ Kit được xây dựng và phát triển bởi **Anh Tester**, dành riêng cho **Cộng đồng Tester Việt Nam**. Mục tiêu của repo này là cung cấp sẵn các thiết lập, quy tắc hành vi (Rules), kỹ năng (Skills), và quy trình (Workflows) chuẩn theo docs của Antigravity để hỗ trợ sử dụng AI Agent trên phần mềm **Antigravity**.
+Đây là bộ Kit làm lại từ **Antigravity Testing Kit** được xây dựng và phát triển bởi **Anh Tester**, dành riêng cho **Cộng đồng Tester Việt Nam**. 
 
-Bộ Kit này **không chỉ dành riêng cho Automation** — mà được thiết kế toàn diện cho cả **Manual Testing** lẫn **Automation Testing**, bao phủ toàn bộ vòng đời kiểm thử phần mềm từ phân tích yêu cầu, thiết kế test cases cho đến thực thi và báo cáo kết quả.
+Mục tiêu: cung cấp sẵn các thiết lập, quy tắc, kỹ năng (Skills), và quy trình chuẩn để hỗ trợ sử dụng AI Agent trên **Claude Code** (CLI / Desktop / VS Code / JetBrains).
 
-Đặc biệt, mọi công đoạn đều được **tích hợp AI một cách có hệ thống**, tạo thành một **quy trình ứng dụng AI hoàn thiện (End-to-End AI Testing Workflow)** — giúp Tester làm việc thông minh hơn, nhanh hơn và hiệu quả hơn trong kỷ nguyên AI.
+## Tính Năng
 
----
+- **15 `tk:*` skills** — Manual testing, automation, integration
+- **Playwright MCP** integration cho browser automation
+- **Multi-framework:** Playwright TS, Selenium Java, Appium, REST Assured
+- **Output Tiếng Việt** — Mọi test cases, reports, giải thích bằng Tiếng Việt
+- **Plan templates** — Quy trình manual testing (QUICK + FULL RBT) và automation (6 bước)
+- **Prompt templates** — One-shot prompts cho các tác vụ phổ biến
+- **Jira/Xray integration** — Lấy requirements, đẩy test results
 
-## 🌟 Tính Năng Nổi Bật
+## Cài Đặt
 
-- **🔁 Quy Trình AI Hoàn Thiện (End-to-End):** Được xây dựng thành một quy trình ứng dụng AI khép kín — từ phân tích yêu cầu (Requirements), thiết kế test cases (Manual), đến viết script tự động (Automation), tích hợp CI/CD và báo cáo kết quả — tất cả đều có AI hỗ trợ.
-- **📋 Hỗ Trợ Cả Manual & Automation Testing:** Không chỉ dừng lại ở Automation, Kit còn trang bị đầy đủ quy trình, skill và prompt cho **Manual Tester** — bao gồm phân tích rủi ro (RBT), thiết kế test cases chất lượng cao và quản lý kết quả kiểm thử.
-- **🧠 Tối ưu cho QA/Tester:** Tất cả các prompt, rule và workflow đều được tinh chỉnh dựa trên tư duy và quy trình làm việc thực tế của cả **Manual Tester** lẫn **Automation Engineer**.
-- **🌐 Hỗ trợ Đa Nền Tảng:** Tương thích với các framework phổ biến như Web (Playwright, Selenium), Mobile (Appium), và API (Playwright, REST Assured).
-- **🛡️ Tuân thủ Tiêu Chuẩn Cao (Strict Rules):** Đảm bảo AI luôn đi theo cấu trúc Page Object Model (POM), viết code rõ ràng, không đoán bừa locator và tự động sửa lỗi (Self-fix).
-- **🇻🇳 Giao Tiếp Bằng Tiếng Việt:** AI được cấu hình để trao đổi, giải thích và báo cáo hoàn toàn bằng Tiếng Việt, thân thiện với người dùng Việt Nam.
-
----
-
-## 📂 Cấu Trúc Thư Mục Chính
-
-```
-antigravity-testing-kit/
-├── .agent/
-│   ├── rules/           # Quy tắc bắt buộc AI phải tuân theo
-│   ├── skills/          # Kỹ năng chuyên biệt cho AI
-│   └── workflows/       # Kịch bản thực thi step-by-step (slash commands)
-├── plan/
-│   ├── manual/          # Quy trình 6 bước sinh Manual Test Cases (AI-RBT)
-│   └── automation/      # Quy trình 6 bước sinh Automation Scripts
-├── prompt_template/     # Prompt mẫu dùng nhanh (copy → paste → gửi)
-├── scripts/
-│   └── integrations/    # Tích hợp công cụ bên ngoài
-│       └── jira/        # Jira & Xray integration (self-contained)
-├── requirements/        # Lưu trữ requirements đã sinh
-├── GEMINI.md            # Rule chung cho AI Agent
-└── TIPS_QUOTA.md        # Cẩm nang tối ưu quota token
-```
-
-### `.agent/` — Bộ não của AI Agent
-
-| Thư mục | Vai trò |
-|---------|--------|
-| `rules/` | Quy tắc bắt buộc: POM, locator strategy, smart waits, Playwright/Selenium/Appium rules |
-| `skills/` | 8 kỹ năng chuyên biệt: automation engineer, manual testing, UI debug, locator healer, test data generator... |
-| `workflows/` | 13 slash commands: `/generate_automation_from_testcases`, `/generate_manual_testcases_rbt`, `/analyze_flaky_tests`... |
----
-
-### `scripts/integrations/` — Tích Hợp Công Cụ Bên Ngoài
-
-Mỗi integration là **thư mục self-contained** (tự quản dependencies, config, README riêng).
-
-| Integration | Chức năng | Docs |
-|-------------|-----------|------|
-| `jira/` | Lấy Requirements từ Jira, xác thực Xray, đẩy kết quả test lên Xray | [README](scripts/integrations/jira/README.md) |
-
+### 1. Clone repo
 ```bash
-# Cài đặt nhanh (ví dụ Jira)
-cd scripts/integrations/jira
-npm install
-cp .env.example .env    # Điền credentials
+git clone https://github.com/anhtester/claude-code-testing-kit.git
 ```
 
----
+### 2. Copy skills vào Claude Code global
+```bash
+cp -r .claude/skills/tk-* ~/.claude/skills/
+```
 
-### `plan/` — Quy Trình 6 Bước Chuyên Sâu
+### 3. Copy CLAUDE.md vào project cần test
+```bash
+cp CLAUDE.md /path/to/your/project/CLAUDE.md
+```
 
-Dành cho các tác vụ phức tạp, cần thực hiện **tuần tự trong cùng 1 conversation**.
+### 4. (Tùy chọn) Copy plans, templates, scripts
+```bash
+cp -r plans/ /path/to/your/project/plans/
+cp -r prompt_templates/ /path/to/your/project/prompt_templates/
+cp -r scripts/ /path/to/your/project/scripts/
+```
 
-| Plan | Mô tả | Bắt đầu nhanh |
-|------|-------|---------------|
-| `plan/manual/` | Sinh Manual Test Cases theo quy trình **AI-RBT 6 bước** (Risk-Based Testing) | Xem `plan/manual/QUICK_START.md` |
-| `plan/automation/` | Sinh Automation Scripts theo **6 bước** từ context → review | Xem `plan/automation/QUICK_START.md` |
+### 5. (Tùy chọn) Cấu hình Playwright MCP
+Nếu sử dụng browser automation, cấu hình Playwright MCP server trong Claude Code settings.
 
-**Cách dùng:** Mở `QUICK_START.md` → Làm theo từng bước → Gửi prompt mỗi bước vào Antigravity.
+### 6. (Tùy chọn) Cấu hình Jira/Xray
+```bash
+cd scripts/integrations && npm install
+cp .env.example .env  # Điền thông tin Jira/Xray
+```
 
-### `prompt_template/` — Prompt Mẫu Dùng Nhanh
+## Skill Catalog
 
-Dành cho tác vụ **đơn lẻ**, chỉ cần copy → thay `[...]` bằng dữ liệu thực → paste → gửi.
+| Slash Command | Mô tả |
+|--------------|-------|
+| `/tk:qa-master` | Master routing — điều hướng đến skill phù hợp |
+| `/tk:manual-testing` | Sinh manual test cases (QUICK + FULL RBT) |
+| `/tk:generate-requirements` | Phân tích website, sinh tài liệu requirements |
+| `/tk:generate-automation` | Chuyển manual TC → automation scripts (6 bước) |
+| `/tk:generate-automation-ui` | UI flow → automation scripts qua browser |
+| `/tk:generate-full-suite` | Khám phá app, sinh full automation suite |
+| `/tk:generate-framework` | Thiết kế automation framework |
+| `/tk:generate-locator` | Sinh locator ổn định (Playwright/Selenium/Appium) |
+| `/tk:generate-test-data` | Sinh test data có cấu trúc, traceable |
+| `/tk:generate-api-tests` | Sinh API tests từ Swagger/OpenAPI |
+| `/tk:generate-regression` | Sinh regression test suite theo priority |
+| `/tk:generate-test-plan` | Khám phá app, sinh test plan |
+| `/tk:analyze-flaky` | Phân tích và fix flaky tests |
+| `/tk:jira-fetch` | Lấy requirements/user stories từ Jira |
+| `/tk:xray-import` | Đẩy kết quả test lên Xray |
 
-| # | Prompt | Mục đích |
-|---|--------|----------|
-| 01 | `prompt_01_generate_requirements.txt` | Phân tích website sinh Requirements |
-| 02 | `prompt_02_create_test_cases.txt` | Sinh test cases từ requirements |
-| 03 | `prompt_03_create_framework_playwright.txt` | Dựng framework Playwright TS |
-| 03 | `prompt_03_create_framework_selenium.txt` | Dựng framework Selenium Java |
-| 04 | `prompt_04_create_script_playwright.txt` | Viết test script Playwright TS |
-| 04 | `prompt_04_create_script_selenium.txt` | Viết test script Selenium Java |
-| 05 | `prompt_05_convert_manual_to_automation.txt` | Chuyển manual TC sang automation |
-| 06 | `prompt_06_review_automation_code.txt` | Review code automation |
-| 07 | `prompt_07_generate_test_data.txt` | Sinh test data có cấu trúc |
-| 08 | `prompt_08_analyze_flaky_tests.txt` | Phân tích test không ổn định |
-| 09 | `prompt_09_create_api_tests.txt` | Viết test API từ Swagger |
+## Quick Start
 
-> 💡 Thư mục `prompt_template/prompt_workflow_template/` chứa phiên bản prompt ngắn gọn hơn, tối ưu cho workflow.
+### Manual Testing
+- **Nhanh:** Gõ `/tk:manual-testing` trong Claude Code
+- **Chi tiết:** Xem `plans/manual/QUICK_START.md`
 
----
+### Automation
+- **Nhanh:** Gõ `/tk:generate-automation` trong Claude Code
+- **Chi tiết:** Xem `plans/automation/QUICK_START.md`
 
-## ✳️ Hướng Dẫn Sử Dụng Trong Antigravity
+### Prompt Templates
+- Xem `prompt_templates/` — Copy nội dung prompt → paste vào Claude Code chat
 
-1. **Clone Repo này về máy:**
-   Hoặc bạn có thể copy trực tiếp thư mục `.agent` từ repo này.
-   
-2. **Tích hợp vào dự án của bạn:**
-   Copy thư mục `.agent` vào thư mục gốc (root directory) của dự án Automation hoặc Manual Test mà bạn đang làm việc.
+## Cấu Trúc Thư Mục
 
-3. **Bắt đầu trò chuyện với AI trên Antigravity:**
-   Khi mở dự án lên Antigravity, AI tự động nhận diện thư mục `.agent` và sẽ áp dụng ngay các Rule, Skill, Workflow của **Anh Tester** đã thiết lập sẵn.
+```
+claude-code-testing-kit/
+├── CLAUDE.md                    # Project rules cho Claude Code
+├── .claude/
+│   └── skills/
+│       ├── tk-qa-master/        # Master skill + references/
+│       ├── tk-manual-testing/   # Manual test case generation
+│       ├── tk-generate-requirements/
+│       ├── tk-generate-automation/
+│       ├── tk-generate-automation-ui/
+│       ├── tk-generate-full-suite/
+│       ├── tk-generate-framework/
+│       ├── tk-generate-locator/
+│       ├── tk-generate-test-data/
+│       ├── tk-generate-api-tests/
+│       ├── tk-generate-regression/
+│       ├── tk-generate-test-plan/
+│       ├── tk-analyze-flaky/
+│       ├── tk-jira-fetch/
+│       └── tk-xray-import/
+├── plans/
+│   ├── manual/                  # Quy trình manual testing (6 bước)
+│   └── automation/              # Quy trình automation (6 bước)
+├── prompt_templates/            # One-shot prompts
+└── scripts/
+    └── integrations/jira/       # Jira/Xray integration scripts
+```
 
-4. **(Tùy chọn) Sử dụng Plan hoặc Prompt Template:**
-   - Tác vụ phức tạp → Mở `plan/manual/QUICK_START.md` hoặc `plan/automation/QUICK_START.md`
-   - Tác vụ nhanh → Copy prompt từ `prompt_template/` → paste vào chat
+## Tech Stack Hỗ Trợ
 
----
+| Loại | Công nghệ |
+|------|-----------|
+| Ngôn ngữ | Java, TypeScript |
+| Web Automation | Playwright (TS/Java), Selenium WebDriver (Java) |
+| Mobile Automation | Appium (Java) |
+| API Automation | REST Assured |
+| Test Framework | TestNG, Playwright Test |
+| Build Tool | Maven, npm |
 
-## 🤝 Hỗ Trợ & Đóng Góp
+## Cộng Đồng & Hỗ Trợ
 
-- Nếu bạn gặp khó khăn trong quá trình sử dụng hoặc muốn đóng góp để bộ công cụ này hoàn thiện hơn, đừng ngần ngại tạo **Issue** hoặc **Pull Request**.
-- Tham gia cộng đồng **Anh Tester** để cùng trao đổi, học hỏi thêm nhiều kiến thức bổ ích về Automation Testing!
-  - 📘 **Fanpage Facebook:** [Anh Tester](https://www.facebook.com/anhtester)
-  - 👥 **Group Facebook Automation:** [Cộng đồng Automation Testing](https://www.facebook.com/groups/automationtest)
-  - 👥 **Group Facebook Manual:** [Cộng đồng Manual Testing](https://www.facebook.com/groups/manualtest)
-  - ✈️ **Telegram Automation:** [Cộng đồng Automation Testing](https://t.me/+kSUGJ3pVvxkyZWU1)
-  - ✈️ **Telegram Manual:** [Cộng đồng Manual Testing](https://t.me/+8eChRz7OVqliZWRl)
+- **Website:** [anhtester.com](https://anhtester.com)
+- **Facebook Group:** [Cộng Đồng Tester Việt Nam](https://www.facebook.com/groups/anhtester)
+- **Telegram:** [Anh Tester Community](https://t.me/anhtester)
 
----
+## License
 
-## 📄 License
-
-Dự án này được phân phối dưới giấy phép nguồn mở **[MIT License](LICENSE)**.
-
----
-Anh Tester Automation Testing 🎯
-https://anhtester.com
+MIT License — Xem file [LICENSE](LICENSE) để biết chi tiết.

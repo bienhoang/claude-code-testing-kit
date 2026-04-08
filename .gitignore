@@ -82,8 +82,7 @@ ExportData/
 .gemini/
 brain/
 artifacts/
-.agent/logs/
-.agent/tmp/
+.claude/settings.local.json
 
 # Temp data/files
 requirements/

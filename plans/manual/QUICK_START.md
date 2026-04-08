@@ -4,7 +4,7 @@
 
 Có **2 luồng** riêng biệt, tuỳ tool AI bạn đang dùng:
 
-### Luồng 1: Antigravity (Slash Command) — Tự động
+### Luồng 1: Claude Code (Slash Command) — Tự động
 
 ```
 Gõ: /generate_manual_testcases_rbt + dán requirements
@@ -28,7 +28,7 @@ Copy prompt Bước 1 → paste vào chat → AI xử lý
 
 ---
 
-## Luồng 1: Antigravity — Prompt nhanh
+## Luồng 1: Claude Code — Prompt nhanh
 
 ```
 /generate_manual_testcases_rbt
@@ -83,4 +83,4 @@ Tiếp tục sang Bước [X]
 2. **Chia module khi nhiều** — Ở Bước 5, nếu có >5 modules, yêu cầu AI sinh từng module
 3. **Review trước khi format** — Ở Bước 5, review test cases trước khi sang Bước 6
 4. **Dùng cùng conversation** — Chạy tất cả 6 bước trong **cùng 1 conversation** để AI giữ context
-5. **Luồng Copy-Paste chi tiết hơn** — Nếu cần chất lượng cao nhất, dùng Luồng 2 (kể cả khi đang dùng Antigravity)
+5. **Luồng Copy-Paste chi tiết hơn** — Nếu cần chất lượng cao nhất, dùng Luồng 2 (kể cả khi đang dùng Claude Code)

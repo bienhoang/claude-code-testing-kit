@@ -21,7 +21,7 @@ Manual Test Cases:
 
 ### Cách 2: Tuần Tự (Từng bước)
 
-| Bước | Prompt gửi Antigravity | Chờ User? |
+| Bước | Prompt gửi Claude Code | Chờ User? |
 |------|------------------------|-----------|
 | **0** | Xem `0_project_architecture/README.md` | Setup 1 lần |
 | **1** | Copy `01.../prompt.txt` + điền `[...]` | ✅ Chờ xác nhận |

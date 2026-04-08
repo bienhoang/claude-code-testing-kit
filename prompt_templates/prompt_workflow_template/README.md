@@ -1,7 +1,7 @@
 # Prompt Workflow Templates — Có Gọi Workflow
 
 Thư mục này chứa các prompt mẫu **đã tích hợp sẵn lệnh gọi workflow** (slash command).
-Khi paste vào Antigravity, agent sẽ tự động load đúng skill và thực thi theo quy trình.
+Khi paste vào Claude Code, agent sẽ tự động load đúng skill và thực thi theo quy trình.
 
 ---
 
@@ -11,7 +11,7 @@ Khi paste vào Antigravity, agent sẽ tự động load đúng skill và thực
 |---|---|---|
 | Gọi workflow | Không | Có (dòng đầu tiên) |
 | Agent load skill | Không (dùng context mặc định) | Có (load đúng skill từ workflow) |
-| Phù hợp | Dùng nhanh bất kỳ AI nào | Dùng với Antigravity/Gemini |
+| Phù hợp | Dùng nhanh bất kỳ AI nào | Dùng với Claude Code/Claude Code |
 
 ## Danh Sách
 
@@ -35,5 +35,5 @@ Lưu ý: prompt_06 (Review Code) không có workflow riêng nên không có tron
 1. Chọn prompt phù hợp
 2. Mở file .txt
 3. Thay [...] bằng dữ liệu thực tế
-4. Copy toàn bộ nội dung → paste vào Antigravity chat → gửi
+4. Copy toàn bộ nội dung → paste vào Claude Code chat → gửi
 5. Agent tự gọi workflow → load skill → thực thi

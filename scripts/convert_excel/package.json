@@ -1,22 +1,22 @@
 {
-  "name": "antigravity-testing-kit",
+  "name": "claude-code-testing-kit",
   "version": "1.0.0",
-  "description": "👋 Chào mừng bạn đến với **Antigravity Testing Kit**!",
+  "description": "Claude Code Testing Kit - Markdown to Excel converter",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/anhtester/antigravity-testing-kit.git"
+    "url": "git+https://github.com/anhtester/claude-code-testing-kit.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/anhtester/antigravity-testing-kit/issues"
+    "url": "https://github.com/anhtester/claude-code-testing-kit/issues"
   },
-  "homepage": "https://github.com/anhtester/antigravity-testing-kit#readme",
+  "homepage": "https://github.com/anhtester/claude-code-testing-kit#readme",
   "dependencies": {
     "xlsx": "^0.18.5"
   }

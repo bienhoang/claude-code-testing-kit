@@ -460,7 +460,7 @@ function parseArgs(argv) {
 function printUsage() {
   console.log(`
 ╔══════════════════════════════════════════════════════════════╗
-║               JIRA FETCHER - Antigravity                    ║
+║               JIRA FETCHER - Claude Code                    ║
 ║     Lấy Requirement / User Story / Issue từ Jira            ║
 ╚══════════════════════════════════════════════════════════════╝
 

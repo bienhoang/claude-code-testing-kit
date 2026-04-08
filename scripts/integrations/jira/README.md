@@ -1,6 +1,6 @@
 # 📋 Jira & Xray Integration Scripts
 
-> Bộ scripts Node.js kết nối Antigravity Testing Kit với Jira REST API và Xray Test Management.
+> Bộ scripts Node.js kết nối Claude Code Testing Kit với Jira REST API và Xray Test Management.
 
 ---
 
@@ -68,7 +68,7 @@ XRAY_CLIENT_SECRET=your-client-secret
 
 1. Truy cập: https://id.atlassian.com/manage-profile/security/api-tokens
 2. Click **"Create API token"**
-3. Đặt label (ví dụ: `antigravity-automation`) → Click **Create**
+3. Đặt label (ví dụ: `claude-code-automation`) → Click **Create**
 4. **Copy token ngay** → Dán vào `JIRA_API_TOKEN` trong file `.env`
 
 > ⚠️ Token chỉ hiển thị **MỘT LẦN**. Nếu mất, phải tạo mới.
@@ -287,9 +287,9 @@ const md = issueToRequirementMarkdown(issue);
 
 ---
 
-## 🤖 Sử dụng qua Antigravity Agent
+## 🤖 Sử dụng qua Claude Code
 
-Bạn có thể gọi các slash commands sau trong Antigravity (Gemini):
+Bạn có thể gọi các slash commands sau trong Claude Code:
 
 | Command | Mô tả |
 |---------|--------|

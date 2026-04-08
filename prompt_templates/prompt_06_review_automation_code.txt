@@ -13,7 +13,7 @@ Code cần review được đính kèm trong file hoặc đoạn code bên dư�
 
 # TASK
 Review automation code này dưới góc nhìn best practice của Test Automation.
-Tham khảo quy tắc trong .agent/rules/ (automation_rules.md, locator_strategy.md, playwright_rules.md, selenium_rules.md).
+Tham khảo quy tắc trong .claude/skills/tk-qa-master/references/ (automation_rules.md, locator_strategy.md, playwright_rules.md, selenium_rules.md).
 
 # CONSTRAINTS
 Phân tích các khía cạnh sau:

@@ -190,7 +190,7 @@ function convertPlaywrightToXray(playwrightReport, projectKey, testPlanKey) {
     info: {
       project: projectKey,
       summary: `Playwright Test Execution - ${new Date().toISOString()}`,
-      description: `Automated Playwright test results imported via Antigravity.\nTotal: ${tests.length} tests`,
+      description: `Automated Playwright test results imported via Claude Code.\nTotal: ${tests.length} tests`,
       startDate: playwrightReport.stats?.startTime || new Date().toISOString(),
     },
     tests: tests.filter((t) => t.testKey),
@@ -267,7 +267,7 @@ async function main() {
 
   console.log(`
 ╔══════════════════════════════════════════════════════════════╗
-║              XRAY IMPORTER - Antigravity                    ║
+║              XRAY IMPORTER - Claude Code                    ║
 ║     Đẩy kết quả test automation lên Xray                    ║
 ╚══════════════════════════════════════════════════════════════╝
 `);
@@ -354,7 +354,7 @@ function parseArgs(argv) {
 function printUsage() {
   console.log(`
 ╔══════════════════════════════════════════════════════════════╗
-║              XRAY IMPORTER - Antigravity                    ║
+║              XRAY IMPORTER - Claude Code                    ║
 ║     Đẩy kết quả test automation lên Xray                    ║
 ╚══════════════════════════════════════════════════════════════╝
 

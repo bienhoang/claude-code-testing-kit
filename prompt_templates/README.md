@@ -26,7 +26,7 @@ Khác với `plan/` (quy trình 6 bước), các prompt ở đây là **1 lần 
 1. Chọn prompt phù hợp với tác vụ
 2. Mở file `.txt`
 3. Thay thế các phần trong `[...]` bằng dữ liệu thực tế
-4. Copy toàn bộ nội dung → paste vào Antigravity chat → gửi
+4. Copy toàn bộ nội dung → paste vào Claude Code chat → gửi
 
 ## Khác biệt với plan/
 
