@@ -22,7 +22,11 @@ Mục tiêu: cung cấp sẵn các thiết lập, quy tắc, kỹ năng (Skills)
 
 **macOS / Linux:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh | bash
+# Interactive (chọn global/local, full/skills-only)
+curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh -o /tmp/tk-install.sh && bash /tmp/tk-install.sh
+
+# Non-interactive (cài global + full kit)
+curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh | bash -s -- --global --full
 ```
 
 **Windows (PowerShell):**

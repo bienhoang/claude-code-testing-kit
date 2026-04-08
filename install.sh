@@ -5,17 +5,7 @@ set -euo pipefail
 # Usage: curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh | bash
 # Flags: --global, --local, --full, --skills-only, --uninstall, --help
 
-# Self-re-exec: if stdin is piped (curl | bash), save to temp file and re-run
-# Redirect stdin from stderr (fd 2) which is still the terminal
-if [ ! -t 0 ] && [ -z "${_TK_REEXEC:-}" ]; then
-  _TK_TMPSCRIPT=$(mktemp "${TMPDIR:-/tmp}/tk-install.XXXXXX")
-  cat > "$_TK_TMPSCRIPT"
-  export _TK_REEXEC=1
-  exec bash "$_TK_TMPSCRIPT" "$@" <&2
-fi
-# Clean up re-exec temp script if it exists
-[[ -n "${_TK_TMPSCRIPT:-}" && -f "${_TK_TMPSCRIPT:-}" ]] && rm -f "$_TK_TMPSCRIPT"
-unset _TK_REEXEC _TK_TMPSCRIPT 2>/dev/null || true
+# Detect piped stdin — handled after parse_args to check if flags were provided
 
 REPO_OWNER="bienhoang"
 REPO_NAME="claude-code-testing-kit"
@@ -243,6 +233,21 @@ main() {
   if [[ "$ACTION" == "uninstall" ]]; then
     uninstall
     exit 0
+  fi
+
+  # If piped (curl | bash) and no flags → show helpful instructions
+  if [ ! -t 0 ] && [[ "$NONINTERACTIVE" == false ]]; then
+    echo -e "${YELLOW}Interactive mode requires a terminal for input.${NC}"
+    echo ""
+    echo "Use one of these methods:"
+    echo ""
+    echo "  # Method 1: Download and run (interactive)"
+    echo "  curl -fsSL https://raw.githubusercontent.com/$REPO_OWNER/$REPO_NAME/main/install.sh -o /tmp/tk-install.sh && bash /tmp/tk-install.sh"
+    echo ""
+    echo "  # Method 2: Non-interactive (no prompts)"
+    echo "  curl -fsSL https://raw.githubusercontent.com/$REPO_OWNER/$REPO_NAME/main/install.sh | bash -s -- --global --full"
+    echo ""
+    exit 1
   fi
 
   check_deps
