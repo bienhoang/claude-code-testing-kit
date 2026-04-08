@@ -22,12 +22,12 @@ Mục tiêu: cung cấp sẵn các thiết lập, quy tắc, kỹ năng (Skills)
 
 **macOS / Linux:**
 ```bash
-curl -fsSL https://raw.githubusercontent.com/anhtester/claude-code-testing-kit/main/install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh | bash
 ```
 
 **Windows (PowerShell):**
 ```powershell
-irm https://raw.githubusercontent.com/anhtester/claude-code-testing-kit/main/install.ps1 | iex
+irm https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.ps1 | iex
 ```
 
 ### Tùy chọn nâng cao
@@ -48,7 +48,7 @@ curl -fsSL .../install.sh | bash -s -- --uninstall
 <details>
 <summary>Xem hướng dẫn cài thủ công</summary>
 
-1. Clone repo: `git clone https://github.com/anhtester/claude-code-testing-kit.git`
+1. Clone repo: `git clone https://github.com/bienhoang/claude-code-testing-kit.git`
 2. Copy skills: `cp -r .claude/skills/tk-* ~/.claude/skills/`
 3. Copy CLAUDE.md vào project: `cp CLAUDE.md /path/to/your/project/`
 4. (Tùy chọn) Copy plans, templates, scripts vào project

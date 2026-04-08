@@ -1,6 +1,6 @@
 #Requires -Version 5.1
 # Claude Code Testing Kit — Installer (Windows PowerShell)
-# Usage: irm https://raw.githubusercontent.com/anhtester/claude-code-testing-kit/main/install.ps1 | iex
+# Usage: irm https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.ps1 | iex
 # Flags: -Global, -Local, -Full, -SkillsOnly, -Uninstall, -Help
 
 param(
@@ -13,7 +13,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$RepoOwner = "anhtester"
+$RepoOwner = "bienhoang"
 $RepoName = "claude-code-testing-kit"
 $Branch = "main"
 $ZipUrl = "https://github.com/$RepoOwner/$RepoName/archive/refs/heads/$Branch.zip"

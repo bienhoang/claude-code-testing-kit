@@ -2,10 +2,10 @@
 set -euo pipefail
 
 # Claude Code Testing Kit — Installer (macOS / Linux)
-# Usage: curl -fsSL https://raw.githubusercontent.com/anhtester/claude-code-testing-kit/main/install.sh | bash
+# Usage: curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh | bash
 # Flags: --global, --local, --full, --skills-only, --uninstall, --help
 
-REPO_OWNER="anhtester"
+REPO_OWNER="bienhoang"
 REPO_NAME="claude-code-testing-kit"
 BRANCH="main"
 TARBALL_URL="https://github.com/$REPO_OWNER/$REPO_NAME/archive/refs/heads/$BRANCH.tar.gz"
