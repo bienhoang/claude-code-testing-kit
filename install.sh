@@ -6,12 +6,12 @@ set -euo pipefail
 # Flags: --global, --local, --full, --skills-only, --uninstall, --help
 
 # Self-re-exec: if stdin is piped (curl | bash), save to temp file and re-run
-# so that stdin is freed for interactive prompts
+# Redirect stdin from stderr (fd 2) which is still the terminal
 if [ ! -t 0 ] && [ -z "${_TK_REEXEC:-}" ]; then
   _TK_TMPSCRIPT=$(mktemp "${TMPDIR:-/tmp}/tk-install.XXXXXX")
   cat > "$_TK_TMPSCRIPT"
   export _TK_REEXEC=1
-  exec bash "$_TK_TMPSCRIPT" "$@"
+  exec bash "$_TK_TMPSCRIPT" "$@" <&2
 fi
 # Clean up re-exec temp script if it exists
 [[ -n "${_TK_TMPSCRIPT:-}" && -f "${_TK_TMPSCRIPT:-}" ]] && rm -f "$_TK_TMPSCRIPT"
