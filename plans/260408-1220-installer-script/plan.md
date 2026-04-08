@@ -1,7 +1,7 @@
 ---
 title: "Installer Script for Claude Code Testing Kit"
 description: "One-liner install scripts (bash + PowerShell) for automated setup of tk:* skills, plans, templates, and scripts"
-status: pending
+status: completed
 priority: P1
 effort: 2h
 tags: [installer, devx, cross-platform]

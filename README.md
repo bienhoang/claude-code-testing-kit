@@ -18,36 +18,44 @@ Mục tiêu: cung cấp sẵn các thiết lập, quy tắc, kỹ năng (Skills)
 
 ## Cài Đặt
 
-### 1. Clone repo
+### Cài nhanh (1 lệnh)
+
+**macOS / Linux:**
 ```bash
-git clone https://github.com/anhtester/claude-code-testing-kit.git
+curl -fsSL https://raw.githubusercontent.com/anhtester/claude-code-testing-kit/main/install.sh | bash
 ```
 
-### 2. Copy skills vào Claude Code global
-```bash
-cp -r .claude/skills/tk-* ~/.claude/skills/
+**Windows (PowerShell):**
+```powershell
+irm https://raw.githubusercontent.com/anhtester/claude-code-testing-kit/main/install.ps1 | iex
 ```
 
-### 3. Copy CLAUDE.md vào project cần test
+### Tùy chọn nâng cao
+
 ```bash
-cp CLAUDE.md /path/to/your/project/CLAUDE.md
+# Cài global, full kit (không hỏi)
+curl -fsSL .../install.sh | bash -s -- --global --full
+
+# Chỉ cài skills
+curl -fsSL .../install.sh | bash -s -- --global --skills-only
+
+# Gỡ cài đặt
+curl -fsSL .../install.sh | bash -s -- --uninstall
 ```
 
-### 4. (Tùy chọn) Copy plans, templates, scripts
-```bash
-cp -r plans/ /path/to/your/project/plans/
-cp -r prompt_templates/ /path/to/your/project/prompt_templates/
-cp -r scripts/ /path/to/your/project/scripts/
-```
+### Cài thủ công
 
-### 5. (Tùy chọn) Cấu hình Playwright MCP
-Nếu sử dụng browser automation, cấu hình Playwright MCP server trong Claude Code settings.
+<details>
+<summary>Xem hướng dẫn cài thủ công</summary>
 
-### 6. (Tùy chọn) Cấu hình Jira/Xray
-```bash
-cd scripts/integrations && npm install
-cp .env.example .env  # Điền thông tin Jira/Xray
-```
+1. Clone repo: `git clone https://github.com/anhtester/claude-code-testing-kit.git`
+2. Copy skills: `cp -r .claude/skills/tk-* ~/.claude/skills/`
+3. Copy CLAUDE.md vào project: `cp CLAUDE.md /path/to/your/project/`
+4. (Tùy chọn) Copy plans, templates, scripts vào project
+5. (Tùy chọn) Cấu hình Playwright MCP trong Claude Code settings
+6. (Tùy chọn) Cấu hình Jira/Xray: `cd scripts/integrations && npm install && cp .env.example .env`
+
+</details>
 
 ## Skill Catalog
 
