@@ -96,7 +96,7 @@ prompt_target() {
   echo "Cài skills vào đâu?"
   echo "  1) Global (~/.claude/skills/) — dùng cho mọi project"
   echo "  2) Local (.claude/skills/) — chỉ project hiện tại"
-  read -rp "Chọn [1/2] (default: 1): " choice
+  read -rp "Chọn [1/2] (default: 1): " choice </dev/tty
   case "${choice:-1}" in
     1) TARGET="global" ;;
     2) TARGET="local" ;;
@@ -110,7 +110,7 @@ prompt_mode() {
   echo "Cài những gì?"
   echo "  1) Full kit (skills + plans + templates + scripts)"
   echo "  2) Chỉ skills + CLAUDE.md"
-  read -rp "Chọn [1/2] (default: 1): " choice
+  read -rp "Chọn [1/2] (default: 1): " choice </dev/tty
   case "${choice:-1}" in
     1) MODE="full" ;;
     2) MODE="skills-only" ;;
@@ -135,7 +135,7 @@ install_skills() {
     local name; name=$(basename "$skill_dir")
     local target_dir="$dest/$name"
     if [[ -d "$target_dir" ]]; then
-      read -rp "  $name đã tồn tại. Ghi đè? [y/N]: " overwrite
+      read -rp "  $name đã tồn tại. Ghi đè? [y/N]: " overwrite </dev/tty
       [[ "${overwrite:-n}" =~ ^[Yy]$ ]] || continue
       rm -rf "$target_dir"
     fi
@@ -148,7 +148,7 @@ install_skills() {
 install_extras() {
   # CLAUDE.md
   if [[ -f "CLAUDE.md" ]]; then
-    read -rp "CLAUDE.md đã tồn tại. Ghi đè? [y/N]: " overwrite
+    read -rp "CLAUDE.md đã tồn tại. Ghi đè? [y/N]: " overwrite </dev/tty
     [[ "${overwrite:-n}" =~ ^[Yy]$ ]] && cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
   else
     cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
@@ -177,7 +177,7 @@ install_extras() {
     echo -e "${GREEN}Copied scripts/${NC}"
     # Offer npm install if Node exists
     if command -v node &>/dev/null && [[ -f "scripts/integrations/package.json" ]]; then
-      read -rp "Chạy npm install cho Jira/Xray scripts? [Y/n]: " npm_install
+      read -rp "Chạy npm install cho Jira/Xray scripts? [Y/n]: " npm_install </dev/tty
       if [[ "${npm_install:-y}" =~ ^[Yy]$ ]]; then
         (cd scripts/integrations && npm install --silent 2>/dev/null) && echo -e "${GREEN}npm install done.${NC}" || echo -e "${YELLOW}npm install failed — chạy thủ công: cd scripts/integrations && npm install${NC}"
       fi
