@@ -28,6 +28,9 @@ curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/m
 **Windows (PowerShell):**
 ```powershell
 irm https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.ps1 | iex
+
+# Với flags (non-interactive):
+& ([scriptblock]::Create((irm https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.ps1))) -Global -Full
 ```
 
 ### Tùy chọn nâng cao

@@ -1,7 +1,9 @@
 #Requires -Version 5.1
 # Claude Code Testing Kit — Installer (Windows PowerShell)
-# Usage: irm https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.ps1 | iex
-# Flags: -Global, -Local, -Full, -SkillsOnly, -Uninstall, -Help
+# Usage:
+#   Interactive:  irm https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.ps1 | iex
+#   With flags:   & ([scriptblock]::Create((irm https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.ps1))) -Global -Full
+#   Local file:   .\install.ps1 -Global -Full
 
 param(
     [switch]$Global,
@@ -41,9 +43,11 @@ function Show-Help {
     Write-Host "  -Uninstall    Remove installed tk-* skills"
     Write-Host "  -Help         Show this help"
     Write-Host ""
-    Write-Host "Examples:"
+    Write-Host "Interactive (no flags needed):"
     Write-Host "  irm .../install.ps1 | iex"
-    Write-Host "  .\install.ps1 -Global -Full"
+    Write-Host ""
+    Write-Host "With flags (use scriptblock pattern):"
+    Write-Host "  & ([scriptblock]::Create((irm .../install.ps1))) -Global -Full"
     exit 0
 }
 
@@ -54,6 +58,7 @@ function Get-AndExtract {
 
     Write-Host "Downloading Testing Kit..." -ForegroundColor Cyan
     try {
+        [Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
         Invoke-WebRequest -Uri $ZipUrl -OutFile $zipFile -UseBasicParsing
     } catch {
         Write-Host "Error: Download failed. $_" -ForegroundColor Red
@@ -141,7 +146,7 @@ function Install-Extras {
         @("manual", "automation") | ForEach-Object {
             $src = Join-Path $srcPlans $_
             if (Test-Path $src) {
-                Copy-Item -Recurse -Path $src -Destination "plans\" -Force
+                Copy-Item -Recurse -Path $src -Destination (Join-Path "plans" $_) -Force
             }
         }
         Write-Host "Copied plans/manual + plans/automation" -ForegroundColor Green
