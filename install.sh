@@ -5,7 +5,7 @@ set -euo pipefail
 # Usage: curl -fsSL https://raw.githubusercontent.com/bienhoang/claude-code-testing-kit/main/install.sh | bash
 # Flags: --global, --local, --full, --skills-only, --uninstall, --help
 
-# Detect piped stdin — handled after parse_args to check if flags were provided
+# Interactive prompts read from /dev/tty to support curl | bash usage
 
 REPO_OWNER="bienhoang"
 REPO_NAME="claude-code-testing-kit"
@@ -99,7 +99,7 @@ prompt_target() {
   echo "Cài skills vào đâu?"
   echo "  1) Global (~/.claude/skills/) — dùng cho mọi project"
   echo "  2) Local (.claude/skills/) — chỉ project hiện tại"
-  read -rp "Chọn [1/2] (default: 1): " choice
+  read -rp "Chọn [1/2] (default: 1): " choice < /dev/tty
   case "${choice:-1}" in
     1) TARGET="global" ;;
     2) TARGET="local" ;;
@@ -113,7 +113,7 @@ prompt_mode() {
   echo "Cài những gì?"
   echo "  1) Full kit (skills + plans + templates + scripts)"
   echo "  2) Chỉ skills + CLAUDE.md"
-  read -rp "Chọn [1/2] (default: 1): " choice
+  read -rp "Chọn [1/2] (default: 1): " choice < /dev/tty
   case "${choice:-1}" in
     1) MODE="full" ;;
     2) MODE="skills-only" ;;
@@ -141,7 +141,7 @@ install_skills() {
       if [[ "$NONINTERACTIVE" == true ]]; then
         rm -rf "$target_dir"
       else
-        read -rp "  $name đã tồn tại. Ghi đè? [y/N]: " overwrite
+        read -rp "  $name đã tồn tại. Ghi đè? [y/N]: " overwrite < /dev/tty
         [[ "${overwrite:-n}" =~ ^[Yy]$ ]] || continue
         rm -rf "$target_dir"
       fi
@@ -158,7 +158,7 @@ install_extras() {
     if [[ "$NONINTERACTIVE" == true ]]; then
       cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
     else
-      read -rp "CLAUDE.md đã tồn tại. Ghi đè? [y/N]: " overwrite
+      read -rp "CLAUDE.md đã tồn tại. Ghi đè? [y/N]: " overwrite < /dev/tty
       [[ "${overwrite:-n}" =~ ^[Yy]$ ]] && cp "$SRC_DIR/CLAUDE.md" ./CLAUDE.md
     fi
   else
@@ -189,7 +189,7 @@ install_extras() {
     # Offer npm install if Node exists
     if command -v node &>/dev/null && [[ -f "scripts/integrations/package.json" ]]; then
       local npm_install="y"
-      [[ "$NONINTERACTIVE" != true ]] && read -rp "Chạy npm install cho Jira/Xray scripts? [Y/n]: " npm_install
+      [[ "$NONINTERACTIVE" != true ]] && read -rp "Chạy npm install cho Jira/Xray scripts? [Y/n]: " npm_install < /dev/tty
       if [[ "${npm_install:-y}" =~ ^[Yy]$ ]]; then
         (cd scripts/integrations && npm install --silent 2>/dev/null) && echo -e "${GREEN}npm install done.${NC}" || echo -e "${YELLOW}npm install failed — chạy thủ công: cd scripts/integrations && npm install${NC}"
       fi
@@ -235,19 +235,16 @@ main() {
     exit 0
   fi
 
-  # If piped (curl | bash) and no flags → show helpful instructions
+  # If piped (curl | bash) and no flags → verify /dev/tty is available for interactive input
   if [ ! -t 0 ] && [[ "$NONINTERACTIVE" == false ]]; then
-    echo -e "${YELLOW}Interactive mode requires a terminal for input.${NC}"
-    echo ""
-    echo "Use one of these methods:"
-    echo ""
-    echo "  # Method 1: Download and run (interactive)"
-    echo "  curl -fsSL https://raw.githubusercontent.com/$REPO_OWNER/$REPO_NAME/main/install.sh -o /tmp/tk-install.sh && bash /tmp/tk-install.sh"
-    echo ""
-    echo "  # Method 2: Non-interactive (no prompts)"
-    echo "  curl -fsSL https://raw.githubusercontent.com/$REPO_OWNER/$REPO_NAME/main/install.sh | bash -s -- --global --full"
-    echo ""
-    exit 1
+    if [ ! -c /dev/tty ]; then
+      echo -e "${YELLOW}No terminal available for interactive input.${NC}"
+      echo ""
+      echo "Use non-interactive mode:"
+      echo "  curl -fsSL https://raw.githubusercontent.com/$REPO_OWNER/$REPO_NAME/main/install.sh | bash -s -- --global --full"
+      echo ""
+      exit 1
+    fi
   fi
 
   check_deps
